@@ -458,9 +458,55 @@ class MedalManager(private val dataStore: DataStoreManager) {
         val nextTierReq = getNextTierRequirement(medal, currentTier)
         val isMaxed = currentTier == medal.tiers.lastOrNull()?.tier
 
+        // Calculate progress percent
         val progressPercent = if (nextTierReq != null && nextTierReq > 0) {
             val currentTierReq = medal.tiers.find { it.tier == currentTier }?.requirement ?: 0
-            ((currentValue - currentTierReq).toFloat() / (nextTierReq - currentTierReq)).coerceIn(0f, 1f)
+            
+            // For challenge medals with dual value types, calculate progress based on current tier
+            val actualCurrentValue = when {
+                // For medals that switch from score to completions
+                medal.id in listOf("bubble_king", "combo_master", "endurance_champion") -> {
+                    if (currentTier.level > BadgeTier.GOLD.level) {
+                        // Diamond/Legendary: use completions
+                        when (medal.id) {
+                            "bubble_king" -> dataStore.bubbleKingCompletionsFlow().first()
+                            "combo_master" -> dataStore.comboMasterCompletionsFlow().first()
+                            "endurance_champion" -> dataStore.enduranceChampionCompletionsFlow().first()
+                            else -> currentValue
+                        }
+                    } else {
+                        // Bronze-Gold: use score
+                        when (medal.id) {
+                            "bubble_king" -> dataStore.highScoreBubbleKingFlow().first()
+                            "combo_master" -> dataStore.highScoreComboMasterFlow().first()
+                            "endurance_champion" -> dataStore.highScoreEnduranceChampionFlow().first()
+                            else -> currentValue
+                        }
+                    }
+                }
+                medal.id in listOf("streak_fury", "time_master", "speed_demon") -> {
+                    if (currentTier == BadgeTier.LEGENDARY) {
+                        // Legendary: use completions
+                        when (medal.id) {
+                            "streak_fury" -> dataStore.perfectStreakCompletionsFlow().first()
+                            "time_master" -> dataStore.timeMasterCompletionsFlow().first()
+                            "speed_demon" -> dataStore.speedDemonCompletionsFlow().first()
+                            else -> currentValue
+                        }
+                    } else {
+                        // Bronze-Diamond: use score
+                        when (medal.id) {
+                            "streak_fury" -> dataStore.highScorePerfectStreakFlow().first()
+                            "time_master" -> dataStore.highScoreTimeMasterFlow().first()
+                            "speed_demon" -> dataStore.highScoreSpeedDemonFlow().first()
+                            else -> currentValue
+                        }
+                    }
+                }
+                else -> currentValue
+            }
+            
+            ((actualCurrentValue - currentTierReq).toFloat() / (nextTierReq - currentTierReq)).coerceIn(0f, 1f)
         } else if (isMaxed) 1f else 0f
 
         return MedalProgress(
@@ -574,12 +620,74 @@ class MedalManager(private val dataStore: DataStoreManager) {
         return bubbleKing && perfectStreak && timeMaster && comboMaster && speedDemon && endurance
     }
 
-    private fun calculateCurrentTier(medal: MedalBadge, value: Int): BadgeTier {
-        var tier = BadgeTier.LOCKED
-        for (t in medal.tiers) {
-            if (value >= t.requirement) tier = t.tier
+    private suspend fun calculateCurrentTier(medal: MedalBadge, value: Int): BadgeTier {
+        // For challenge medals with dual value types (score/completions), we need special handling
+        when (medal.id) {
+            "bubble_king", "combo_master", "endurance_champion" -> {
+                // Bronze-Gold use scores, Diamond-Legendary use completions
+                val highScore = when (medal.id) {
+                    "bubble_king" -> dataStore.highScoreBubbleKingFlow().first()
+                    "combo_master" -> dataStore.highScoreComboMasterFlow().first()
+                    "endurance_champion" -> dataStore.highScoreEnduranceChampionFlow().first()
+                    else -> 0
+                }
+                val completions = when (medal.id) {
+                    "bubble_king" -> dataStore.bubbleKingCompletionsFlow().first()
+                    "combo_master" -> dataStore.comboMasterCompletionsFlow().first()
+                    "endurance_champion" -> dataStore.enduranceChampionCompletionsFlow().first()
+                    else -> 0
+                }
+                
+                var tier = BadgeTier.LOCKED
+                // Check score-based tiers (Bronze-Gold)
+                for (t in medal.tiers.filter { it.tier.level <= BadgeTier.GOLD.level }) {
+                    if (highScore >= t.requirement) tier = t.tier
+                }
+                // Check completion-based tiers (Diamond-Legendary) only if Gold is achieved
+                if (tier == BadgeTier.GOLD && completions > 0) {
+                    for (t in medal.tiers.filter { it.tier.level > BadgeTier.GOLD.level }) {
+                        if (completions >= t.requirement) tier = t.tier
+                    }
+                }
+                return tier
+            }
+            "streak_fury", "time_master", "speed_demon" -> {
+                // Bronze-Diamond use scores, Legendary uses completions
+                val highScore = when (medal.id) {
+                    "streak_fury" -> dataStore.highScorePerfectStreakFlow().first()
+                    "time_master" -> dataStore.highScoreTimeMasterFlow().first()
+                    "speed_demon" -> dataStore.highScoreSpeedDemonFlow().first()
+                    else -> 0
+                }
+                val completions = when (medal.id) {
+                    "streak_fury" -> dataStore.perfectStreakCompletionsFlow().first()
+                    "time_master" -> dataStore.timeMasterCompletionsFlow().first()
+                    "speed_demon" -> dataStore.speedDemonCompletionsFlow().first()
+                    else -> 0
+                }
+                
+                var tier = BadgeTier.LOCKED
+                // Check score-based tiers (Bronze-Diamond)
+                for (t in medal.tiers.filter { it.tier.level <= BadgeTier.DIAMOND.level }) {
+                    if (highScore >= t.requirement) tier = t.tier
+                }
+                // Check completion-based tier (Legendary) only if Diamond is achieved
+                if (tier == BadgeTier.DIAMOND && completions > 0) {
+                    for (t in medal.tiers.filter { it.tier == BadgeTier.LEGENDARY }) {
+                        if (completions >= t.requirement) tier = t.tier
+                    }
+                }
+                return tier
+            }
+            else -> {
+                // Standard tier calculation for all other medals
+                var tier = BadgeTier.LOCKED
+                for (t in medal.tiers) {
+                    if (value >= t.requirement) tier = t.tier
+                }
+                return tier
+            }
         }
-        return tier
     }
 
     private fun getNextTierRequirement(medal: MedalBadge, currentTier: BadgeTier): Int? {
