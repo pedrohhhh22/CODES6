@@ -478,66 +478,70 @@ class MedalManager(private val dataStore: DataStoreManager) {
             "score_master" -> dataStore.highScoreFlow().first()
             "bubble_king" -> {
                 // For Bronze-Gold: use high score, for Diamond+: use completions
-                val currentTier = calculateCurrentTierForScore(medal, dataStore.highScoreBubbleKingFlow().first())
-                if (currentTier.level >= BadgeTier.DIAMOND.level) {
+                val highScore = dataStore.highScoreBubbleKingFlow().first()
+                if (highScore >= 5000) {
+                    // Completed at least once, use completions for Diamond/Legendary
                     dataStore.bubbleKingCompletionsFlow().first()
                 } else {
-                    dataStore.highScoreBubbleKingFlow().first()
+                    highScore
                 }
             }
             "streak_fury" -> {
                 // For Bronze-Diamond: use high score, for Legendary: use completions
-                val currentTier = calculateCurrentTierForScore(medal, dataStore.highScorePerfectStreakFlow().first())
-                if (currentTier == BadgeTier.LEGENDARY || currentTier.level >= BadgeTier.LEGENDARY.level) {
+                val highScore = dataStore.highScorePerfectStreakFlow().first()
+                if (highScore >= 100) {
+                    // Completed at least once, use completions for Legendary
                     dataStore.perfectStreakCompletionsFlow().first()
                 } else {
-                    dataStore.highScorePerfectStreakFlow().first()
+                    highScore
                 }
             }
             "time_master" -> {
                 // For Bronze-Diamond: use high score, for Legendary: use completions
-                val currentTier = calculateCurrentTierForScore(medal, dataStore.highScoreTimeMasterFlow().first())
-                if (currentTier == BadgeTier.LEGENDARY || currentTier.level >= BadgeTier.LEGENDARY.level) {
+                val highScore = dataStore.highScoreTimeMasterFlow().first()
+                if (highScore >= 50) {
+                    // Completed at least once, use completions for Legendary
                     dataStore.timeMasterCompletionsFlow().first()
                 } else {
-                    dataStore.highScoreTimeMasterFlow().first()
+                    highScore
                 }
             }
             "combo_master" -> {
                 // For Bronze-Gold: use high score, for Diamond+: use completions
-                val currentTier = calculateCurrentTierForScore(medal, dataStore.highScoreComboMasterFlow().first())
-                if (currentTier.level >= BadgeTier.DIAMOND.level) {
+                val highScore = dataStore.highScoreComboMasterFlow().first()
+                if (highScore >= 50) {
+                    // Completed at least once, use completions for Diamond/Legendary
                     dataStore.comboMasterCompletionsFlow().first()
                 } else {
-                    dataStore.highScoreComboMasterFlow().first()
+                    highScore
                 }
             }
             "speed_demon" -> {
                 // For Bronze-Diamond: use high score, for Legendary: use completions
-                val currentTier = calculateCurrentTierForScore(medal, dataStore.highScoreSpeedDemonFlow().first())
-                if (currentTier == BadgeTier.LEGENDARY || currentTier.level >= BadgeTier.LEGENDARY.level) {
+                val highScore = dataStore.highScoreSpeedDemonFlow().first()
+                if (highScore >= 100) {
+                    // Completed at least once, use completions for Legendary
                     dataStore.speedDemonCompletionsFlow().first()
                 } else {
-                    dataStore.highScoreSpeedDemonFlow().first()
+                    highScore
                 }
             }
             "endurance_champion" -> {
                 // For Bronze-Gold: use high score, for Diamond+: use completions
-                val currentTier = calculateCurrentTierForScore(medal, dataStore.highScoreEnduranceChampionFlow().first())
-                if (currentTier.level >= BadgeTier.DIAMOND.level) {
+                val highScore = dataStore.highScoreEnduranceChampionFlow().first()
+                if (highScore >= 180) {
+                    // Completed at least once, use completions for Diamond/Legendary
                     dataStore.enduranceChampionCompletionsFlow().first()
                 } else {
-                    dataStore.highScoreEnduranceChampionFlow().first()
+                    highScore
                 }
             }
             "sharpshooter" -> dataStore.bestClickPercentFlow().first()
             "challenger" -> {
                 // For Bronze-Gold: use challenges completed count, for Diamond+: need special logic
                 val completedCount = dataStore.challengesCompletedCountFlow().first()
-                val currentTier = calculateCurrentTierForScore(medal, completedCount)
-                if (currentTier.level >= BadgeTier.DIAMOND.level) {
-                    // Diamond: Check if all 6 have Gold tier
-                    // Legendary: Check if all 6 completed 10+ times
+                if (completedCount >= 6) {
+                    // All 6 completed, check for Diamond/Legendary requirements
                     val allGold = checkAllChallengesGoldOrBetter()
                     val allLegendary = checkAllChallengesLegendary()
                     if (allLegendary) 10 // Arbitrary high value for Legendary
