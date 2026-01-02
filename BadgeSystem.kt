@@ -466,8 +466,12 @@ class MedalManager(private val dataStore: DataStoreManager) {
             val actualCurrentValue = when {
                 // For medals that switch from score to completions after Gold
                 medal.id in listOf("bubble_king", "combo_master", "endurance_champion", "streak_fury", "time_master", "speed_demon") -> {
-                    if (currentTier.level > BadgeTier.GOLD.level) {
-                        // Diamond/Legendary: use completions
+                    // Determine if next tier is completion-based
+                    val nextTierLevel = medal.tiers.find { it.requirement == nextTierReq }?.tier?.level
+                    val isNextTierCompletionBased = nextTierLevel != null && nextTierLevel > BadgeTier.GOLD.level
+                    
+                    if (isNextTierCompletionBased) {
+                        // Next tier is Diamond/Legendary: use completions
                         when (medal.id) {
                             "bubble_king" -> dataStore.bubbleKingCompletionsFlow().first()
                             "combo_master" -> dataStore.comboMasterCompletionsFlow().first()
@@ -478,7 +482,7 @@ class MedalManager(private val dataStore: DataStoreManager) {
                             else -> currentValue
                         }
                     } else {
-                        // Bronze-Gold: use score
+                        // Current/next tier is Bronze-Gold: use score
                         when (medal.id) {
                             "bubble_king" -> dataStore.highScoreBubbleKingFlow().first()
                             "combo_master" -> dataStore.highScoreComboMasterFlow().first()
