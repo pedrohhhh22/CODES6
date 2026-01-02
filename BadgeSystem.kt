@@ -245,9 +245,9 @@ object MedalDefinitions {
         tiers = listOf(
             MedalTierInfo(BadgeTier.BRONZE, 25, "Reach 25 streak"),
             MedalTierInfo(BadgeTier.SILVER, 50, "Reach 50 streak"),
-            MedalTierInfo(BadgeTier.GOLD, 75, "Reach 75 streak"),
-            MedalTierInfo(BadgeTier.DIAMOND, 100, "Complete (100 streak)"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 10, "Complete 10 times")
+            MedalTierInfo(BadgeTier.GOLD, 100, "Complete (100 streak)"),
+            MedalTierInfo(BadgeTier.DIAMOND, 5, "Complete 5 times"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 15, "Complete 15 times")
         )
     )
 
@@ -464,14 +464,17 @@ class MedalManager(private val dataStore: DataStoreManager) {
             
             // For challenge medals with dual value types, calculate progress based on current tier
             val actualCurrentValue = when {
-                // For medals that switch from score to completions
-                medal.id in listOf("bubble_king", "combo_master", "endurance_champion") -> {
+                // For medals that switch from score to completions after Gold
+                medal.id in listOf("bubble_king", "combo_master", "endurance_champion", "streak_fury", "time_master", "speed_demon") -> {
                     if (currentTier.level > BadgeTier.GOLD.level) {
                         // Diamond/Legendary: use completions
                         when (medal.id) {
                             "bubble_king" -> dataStore.bubbleKingCompletionsFlow().first()
                             "combo_master" -> dataStore.comboMasterCompletionsFlow().first()
                             "endurance_champion" -> dataStore.enduranceChampionCompletionsFlow().first()
+                            "streak_fury" -> dataStore.perfectStreakCompletionsFlow().first()
+                            "time_master" -> dataStore.timeMasterCompletionsFlow().first()
+                            "speed_demon" -> dataStore.speedDemonCompletionsFlow().first()
                             else -> currentValue
                         }
                     } else {
@@ -480,22 +483,6 @@ class MedalManager(private val dataStore: DataStoreManager) {
                             "bubble_king" -> dataStore.highScoreBubbleKingFlow().first()
                             "combo_master" -> dataStore.highScoreComboMasterFlow().first()
                             "endurance_champion" -> dataStore.highScoreEnduranceChampionFlow().first()
-                            else -> currentValue
-                        }
-                    }
-                }
-                medal.id in listOf("streak_fury", "time_master", "speed_demon") -> {
-                    if (currentTier == BadgeTier.LEGENDARY) {
-                        // Legendary: use completions
-                        when (medal.id) {
-                            "streak_fury" -> dataStore.perfectStreakCompletionsFlow().first()
-                            "time_master" -> dataStore.timeMasterCompletionsFlow().first()
-                            "speed_demon" -> dataStore.speedDemonCompletionsFlow().first()
-                            else -> currentValue
-                        }
-                    } else {
-                        // Bronze-Diamond: use score
-                        when (medal.id) {
                             "streak_fury" -> dataStore.highScorePerfectStreakFlow().first()
                             "time_master" -> dataStore.highScoreTimeMasterFlow().first()
                             "speed_demon" -> dataStore.highScoreSpeedDemonFlow().first()
@@ -525,44 +512,44 @@ class MedalManager(private val dataStore: DataStoreManager) {
             "bubble_king" -> {
                 val highScore = dataStore.highScoreBubbleKingFlow().first()
                 val completions = dataStore.bubbleKingCompletionsFlow().first()
-                // For Bronze-Gold tiers: use high score
-                // For Diamond-Legendary tiers: use completions
-                if (highScore >= 5000 && completions > 0) completions else highScore
+                // Determine current tier to decide what value to return
+                val currentScoreTier = if (highScore >= 5000) BadgeTier.GOLD else BadgeTier.LOCKED
+                if (currentScoreTier >= BadgeTier.GOLD && completions > 0) completions else highScore
             }
             "streak_fury" -> {
                 val highScore = dataStore.highScorePerfectStreakFlow().first()
                 val completions = dataStore.perfectStreakCompletionsFlow().first()
-                // For Bronze-Diamond tiers: use high score
-                // For Legendary tier: use completions
-                if (highScore >= 100 && completions > 0) completions else highScore
+                // Determine current tier to decide what value to return
+                val currentScoreTier = if (highScore >= 100) BadgeTier.GOLD else BadgeTier.LOCKED
+                if (currentScoreTier >= BadgeTier.GOLD && completions > 0) completions else highScore
             }
             "time_master" -> {
                 val highScore = dataStore.highScoreTimeMasterFlow().first()
                 val completions = dataStore.timeMasterCompletionsFlow().first()
-                // For Bronze-Gold tiers: use high score
-                // For Diamond-Legendary tiers: use completions
-                if (highScore >= 50 && completions > 0) completions else highScore
+                // Determine current tier to decide what value to return
+                val currentScoreTier = if (highScore >= 50) BadgeTier.GOLD else BadgeTier.LOCKED
+                if (currentScoreTier >= BadgeTier.GOLD && completions > 0) completions else highScore
             }
             "combo_master" -> {
                 val highScore = dataStore.highScoreComboMasterFlow().first()
                 val completions = dataStore.comboMasterCompletionsFlow().first()
-                // For Bronze-Gold tiers: use high score
-                // For Diamond-Legendary tiers: use completions
-                if (highScore >= 50 && completions > 0) completions else highScore
+                // Determine current tier to decide what value to return
+                val currentScoreTier = if (highScore >= 50) BadgeTier.GOLD else BadgeTier.LOCKED
+                if (currentScoreTier >= BadgeTier.GOLD && completions > 0) completions else highScore
             }
             "speed_demon" -> {
                 val highScore = dataStore.highScoreSpeedDemonFlow().first()
                 val completions = dataStore.speedDemonCompletionsFlow().first()
-                // For Bronze-Gold tiers: use high score
-                // For Diamond-Legendary tiers: use completions
-                if (highScore >= 100 && completions > 0) completions else highScore
+                // Determine current tier to decide what value to return
+                val currentScoreTier = if (highScore >= 100) BadgeTier.GOLD else BadgeTier.LOCKED
+                if (currentScoreTier >= BadgeTier.GOLD && completions > 0) completions else highScore
             }
             "endurance_champion" -> {
                 val highScore = dataStore.highScoreEnduranceChampionFlow().first()
                 val completions = dataStore.enduranceChampionCompletionsFlow().first()
-                // For Bronze-Gold tiers: use high score
-                // For Diamond-Legendary tiers: use completions
-                if (highScore >= 180 && completions > 0) completions else highScore
+                // Determine current tier to decide what value to return
+                val currentScoreTier = if (highScore >= 180) BadgeTier.GOLD else BadgeTier.LOCKED
+                if (currentScoreTier >= BadgeTier.GOLD && completions > 0) completions else highScore
             }
             "sharpshooter" -> dataStore.bestClickPercentFlow().first()
             "challenger" -> {
@@ -652,7 +639,7 @@ class MedalManager(private val dataStore: DataStoreManager) {
                 return tier
             }
             "streak_fury", "time_master", "speed_demon" -> {
-                // Bronze-Diamond use scores, Legendary uses completions
+                // Bronze-Gold use scores, Diamond-Legendary use completions
                 val highScore = when (medal.id) {
                     "streak_fury" -> dataStore.highScorePerfectStreakFlow().first()
                     "time_master" -> dataStore.highScoreTimeMasterFlow().first()
@@ -667,13 +654,13 @@ class MedalManager(private val dataStore: DataStoreManager) {
                 }
                 
                 var tier = BadgeTier.LOCKED
-                // Check score-based tiers (Bronze-Diamond)
-                for (t in medal.tiers.filter { it.tier.level <= BadgeTier.DIAMOND.level }) {
+                // Check score-based tiers (Bronze-Gold)
+                for (t in medal.tiers.filter { it.tier.level <= BadgeTier.GOLD.level }) {
                     if (highScore >= t.requirement) tier = t.tier
                 }
-                // Check completion-based tier (Legendary) only if Diamond is achieved
-                if (tier == BadgeTier.DIAMOND && completions > 0) {
-                    for (t in medal.tiers.filter { it.tier == BadgeTier.LEGENDARY }) {
+                // Check completion-based tiers (Diamond-Legendary) only if Gold is achieved
+                if (tier == BadgeTier.GOLD && completions > 0) {
+                    for (t in medal.tiers.filter { it.tier.level > BadgeTier.GOLD.level }) {
                         if (completions >= t.requirement) tier = t.tier
                     }
                 }
@@ -691,8 +678,11 @@ class MedalManager(private val dataStore: DataStoreManager) {
     }
 
     private fun getNextTierRequirement(medal: MedalBadge, currentTier: BadgeTier): Int? {
+        if (currentTier == BadgeTier.LOCKED) {
+            return medal.tiers.firstOrNull()?.requirement
+        }
         val idx = medal.tiers.indexOfFirst { it.tier == currentTier }
-        return if (idx < medal.tiers.size - 1) medal.tiers[idx + 1].requirement else null
+        return if (idx >= 0 && idx < medal.tiers.size - 1) medal.tiers[idx + 1].requirement else null
     }
 
     private suspend fun getOwnedItemsCount(): Int {
