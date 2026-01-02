@@ -209,185 +209,185 @@ object MedalDefinitions {
     val SCORE_MASTER = MedalBadge(
         id = "score_master",
         name = "Score Master",
-        description = "Domina el modo clásico",
+        description = "Master of classic mode",
         category = BadgeCategory.RECORDS,
         shape = BadgeShape.ROYAL_MEDAL,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.BRONZE, 1000, "1,000 puntos"),
-            MedalTierInfo(BadgeTier.SILVER, 3000, "3,000 puntos"),
-            MedalTierInfo(BadgeTier.GOLD, 7500, "7,500 puntos"),
-            MedalTierInfo(BadgeTier.DIAMOND, 15000, "15,000 puntos"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 30000, "30,000 puntos")
+            MedalTierInfo(BadgeTier.BRONZE, 1000, "Score 1,000 points"),
+            MedalTierInfo(BadgeTier.SILVER, 3000, "Score 3,000 points"),
+            MedalTierInfo(BadgeTier.GOLD, 7500, "Score 7,500 points"),
+            MedalTierInfo(BadgeTier.DIAMOND, 15000, "Score 15,000 points"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 30000, "Score 30,000 points")
         )
     )
 
     val BUBBLE_KING = MedalBadge(
         id = "bubble_king",
         name = "Bubble King",
-        description = "Rey del modo Bubble King",
+        description = "Master of Bubble King challenge",
         category = BadgeCategory.CHALLENGES,
         shape = BadgeShape.IMPERIAL_CROWN,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.BRONZE, 2000, "2,000 puntos"),
-            MedalTierInfo(BadgeTier.SILVER, 3500, "3,500 puntos"),
-            MedalTierInfo(BadgeTier.GOLD, 5000, "Completar (5,000)"),
-            MedalTierInfo(BadgeTier.DIAMOND, 1, "Completar 5 veces"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 1, "Completar 15 veces")
+            MedalTierInfo(BadgeTier.BRONZE, 2000, "Score 2,000 in Bubble King"),
+            MedalTierInfo(BadgeTier.SILVER, 3500, "Score 3,500 in Bubble King"),
+            MedalTierInfo(BadgeTier.GOLD, 5000, "Complete Bubble King (5,000)"),
+            MedalTierInfo(BadgeTier.DIAMOND, 5, "Complete Bubble King 5 times"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 15, "Complete Bubble King 15 times")
         )
     )
 
     val STREAK_FURY = MedalBadge(
         id = "streak_fury",
         name = "Perfect Streak",
-        description = "Rachas perfectas",
+        description = "Perfect streaks master",
         category = BadgeCategory.CHALLENGES,
         shape = BadgeShape.PHOENIX_FLAME,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.BRONZE, 25, "25 de racha"),
-            MedalTierInfo(BadgeTier.SILVER, 50, "50 de racha"),
-            MedalTierInfo(BadgeTier.GOLD, 75, "75 de racha"),
-            MedalTierInfo(BadgeTier.DIAMOND, 100, "100 de racha (completar)"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 1, "Completar 10 veces")
+            MedalTierInfo(BadgeTier.BRONZE, 25, "Reach 25 streak"),
+            MedalTierInfo(BadgeTier.SILVER, 50, "Reach 50 streak"),
+            MedalTierInfo(BadgeTier.GOLD, 75, "Reach 75 streak"),
+            MedalTierInfo(BadgeTier.DIAMOND, 100, "Complete (100 streak)"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 10, "Complete 10 times")
         )
     )
 
     val TIME_MASTER = MedalBadge(
         id = "time_master",
         name = "Time Master",
-        description = "Maestro del tiempo",
+        description = "Master of time challenge",
         category = BadgeCategory.CHALLENGES,
         shape = BadgeShape.MYSTIC_HEXAGON,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.BRONZE, 13, "Pop 12.5 burbujas (25%)"),
-            MedalTierInfo(BadgeTier.SILVER, 25, "Pop 25 burbujas (50%)"),
-            MedalTierInfo(BadgeTier.GOLD, 38, "Pop 37.5 burbujas (75%)"),
-            MedalTierInfo(BadgeTier.DIAMOND, 50, "Completar (50 en 60s)"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 1, "Completar 10 veces")
+            MedalTierInfo(BadgeTier.BRONZE, 12, "Pop 12 bubbles"),
+            MedalTierInfo(BadgeTier.SILVER, 25, "Pop 25 bubbles"),
+            MedalTierInfo(BadgeTier.GOLD, 50, "Complete (50 pops in 60s)"),
+            MedalTierInfo(BadgeTier.DIAMOND, 5, "Complete 5 times"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 15, "Complete 15 times")
         )
     )
 
     val COMBO_MASTER = MedalBadge(
         id = "combo_master",
         name = "Combo Master",
-        description = "Maestro de los combos",
+        description = "Master of combos",
         category = BadgeCategory.CHALLENGES,
         shape = BadgeShape.CELESTIAL_STAR,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.BRONZE, 25, "Combo de 25"),
-            MedalTierInfo(BadgeTier.SILVER, 35, "Combo de 35"),
-            MedalTierInfo(BadgeTier.GOLD, 50, "Completar (combo 50)"),
-            MedalTierInfo(BadgeTier.DIAMOND, 1, "Completar 5 veces"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 1, "Completar 15 veces")
+            MedalTierInfo(BadgeTier.BRONZE, 15, "Reach 15 combo"),
+            MedalTierInfo(BadgeTier.SILVER, 30, "Reach 30 combo"),
+            MedalTierInfo(BadgeTier.GOLD, 50, "Complete (50 combo)"),
+            MedalTierInfo(BadgeTier.DIAMOND, 5, "Complete 5 times"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 15, "Complete 15 times")
         )
     )
 
     val SPEED_DEMON = MedalBadge(
         id = "speed_demon",
         name = "Speed Demon",
-        description = "Demonio de la velocidad",
+        description = "Master of speed",
         category = BadgeCategory.CHALLENGES,
         shape = BadgeShape.PHOENIX_FLAME,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.BRONZE, 25, "Pop 25 burbujas (25%)"),
-            MedalTierInfo(BadgeTier.SILVER, 50, "Pop 50 burbujas (50%)"),
-            MedalTierInfo(BadgeTier.GOLD, 75, "Pop 75 burbujas (75%)"),
-            MedalTierInfo(BadgeTier.DIAMOND, 100, "Completar (100 en 30s)"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 1, "Completar 10 veces")
+            MedalTierInfo(BadgeTier.BRONZE, 25, "Pop 25 bubbles"),
+            MedalTierInfo(BadgeTier.SILVER, 50, "Pop 50 bubbles"),
+            MedalTierInfo(BadgeTier.GOLD, 100, "Complete (100 pops in 30s)"),
+            MedalTierInfo(BadgeTier.DIAMOND, 5, "Complete 5 times"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 15, "Complete 15 times")
         )
     )
 
     val ENDURANCE_CHAMPION = MedalBadge(
         id = "endurance_champion",
         name = "Endurance Champion",
-        description = "Campeón de resistencia",
+        description = "Master of endurance",
         category = BadgeCategory.CHALLENGES,
         shape = BadgeShape.WARRIOR_SHIELD,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.BRONZE, 60, "Sobrevivir 60s"),
-            MedalTierInfo(BadgeTier.SILVER, 120, "Sobrevivir 120s"),
-            MedalTierInfo(BadgeTier.GOLD, 180, "Completar (180s)"),
-            MedalTierInfo(BadgeTier.DIAMOND, 1, "Completar 5 veces"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 1, "Completar 15 veces")
+            MedalTierInfo(BadgeTier.BRONZE, 60, "Survive 60 seconds"),
+            MedalTierInfo(BadgeTier.SILVER, 120, "Survive 120 seconds"),
+            MedalTierInfo(BadgeTier.GOLD, 180, "Complete (180 seconds)"),
+            MedalTierInfo(BadgeTier.DIAMOND, 5, "Complete 5 times"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 15, "Complete 15 times")
         )
     )
 
     val SHARPSHOOTER = MedalBadge(
         id = "sharpshooter",
         name = "Sharpshooter",
-        description = "Precisión letal",
+        description = "Lethal precision",
         category = BadgeCategory.RECORDS,
         shape = BadgeShape.CELESTIAL_STAR,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.BRONZE, 70, "70% precisión"),
-            MedalTierInfo(BadgeTier.SILVER, 80, "80% precisión"),
-            MedalTierInfo(BadgeTier.GOLD, 90, "90% precisión"),
-            MedalTierInfo(BadgeTier.DIAMOND, 95, "95% precisión"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 99, "99% precisión")
+            MedalTierInfo(BadgeTier.BRONZE, 70, "70% accuracy"),
+            MedalTierInfo(BadgeTier.SILVER, 80, "80% accuracy"),
+            MedalTierInfo(BadgeTier.GOLD, 90, "90% accuracy"),
+            MedalTierInfo(BadgeTier.DIAMOND, 95, "95% accuracy"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 99, "99% accuracy")
         )
     )
 
     val CHALLENGER = MedalBadge(
         id = "challenger",
         name = "Challenger",
-        description = "Conquistador de desafíos",
+        description = "Conqueror of challenges",
         category = BadgeCategory.CHALLENGES,
         shape = BadgeShape.WARRIOR_SHIELD,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.BRONZE, 1, "Completar 1 desafío"),
-            MedalTierInfo(BadgeTier.SILVER, 3, "Completar 3 desafíos"),
-            MedalTierInfo(BadgeTier.GOLD, 6, "Completar todos (6)"),
-            MedalTierInfo(BadgeTier.DIAMOND, 1, "Todos con medalla Gold"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 1, "Completar todos 10 veces")
+            MedalTierInfo(BadgeTier.BRONZE, 1, "Complete 1 challenge"),
+            MedalTierInfo(BadgeTier.SILVER, 3, "Complete 3 challenges"),
+            MedalTierInfo(BadgeTier.GOLD, 6, "Complete all 6 challenges"),
+            MedalTierInfo(BadgeTier.DIAMOND, 6, "Gold tier on all 6 challenges"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 60, "Complete all challenges 10+ times each")
         )
     )
 
     val TOURNAMENT_WARRIOR = MedalBadge(
         id = "tournament_warrior",
         name = "Tournament Warrior",
-        description = "Guerrero de torneos",
+        description = "Tournament warrior",
         category = BadgeCategory.TOURNAMENTS,
         shape = BadgeShape.DRAGON_EMBLEM,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.BRONZE, 1, "Participar en 1"),
-            MedalTierInfo(BadgeTier.SILVER, 5, "Participar en 5"),
-            MedalTierInfo(BadgeTier.GOLD, 15, "Participar en 15"),
-            MedalTierInfo(BadgeTier.DIAMOND, 30, "Participar en 30"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 50, "Participar en 50")
+            MedalTierInfo(BadgeTier.BRONZE, 1, "Participate in 1"),
+            MedalTierInfo(BadgeTier.SILVER, 5, "Participate in 5"),
+            MedalTierInfo(BadgeTier.GOLD, 15, "Participate in 15"),
+            MedalTierInfo(BadgeTier.DIAMOND, 30, "Participate in 30"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 50, "Participate in 50")
         )
     )
 
     val CHAMPION = MedalBadge(
         id = "champion",
         name = "Champion",
-        description = "Campeón de torneos",
+        description = "Tournament champion",
         category = BadgeCategory.TOURNAMENTS,
         shape = BadgeShape.IMPERIAL_CROWN,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.GOLD, 1, "Ganar 1 torneo"),
-            MedalTierInfo(BadgeTier.DIAMOND, 3, "Ganar 3 torneos"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 10, "Ganar 10 torneos")
+            MedalTierInfo(BadgeTier.GOLD, 1, "Win 1 tournament"),
+            MedalTierInfo(BadgeTier.DIAMOND, 3, "Win 3 tournaments"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 10, "Win 10 tournaments")
         )
     )
 
     val PODIUM_STAR = MedalBadge(
         id = "podium_star",
         name = "Podium Star",
-        description = "Siempre en el podio",
+        description = "Always on the podium",
         category = BadgeCategory.TOURNAMENTS,
         shape = BadgeShape.CELESTIAL_STAR,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.BRONZE, 1, "Top 3 una vez"),
-            MedalTierInfo(BadgeTier.SILVER, 3, "Top 3 tres veces"),
-            MedalTierInfo(BadgeTier.GOLD, 5, "Top 3 cinco veces"),
-            MedalTierInfo(BadgeTier.DIAMOND, 10, "Top 3 diez veces"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 25, "Top 3 veinticinco veces")
+            MedalTierInfo(BadgeTier.BRONZE, 1, "Top 3 once"),
+            MedalTierInfo(BadgeTier.SILVER, 3, "Top 3 three times"),
+            MedalTierInfo(BadgeTier.GOLD, 5, "Top 3 five times"),
+            MedalTierInfo(BadgeTier.DIAMOND, 10, "Top 3 ten times"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 25, "Top 3 twenty-five times")
         )
     )
 
     val POP_LEGEND = MedalBadge(
         id = "pop_legend",
         name = "Pop Legend",
-        description = "Leyenda del pop",
+        description = "Legend of popping",
         category = BadgeCategory.PROGRESS,
         shape = BadgeShape.COSMIC_ORB,
         tiers = listOf(
@@ -402,40 +402,40 @@ object MedalDefinitions {
     val DEDICATED = MedalBadge(
         id = "dedicated",
         name = "Dedicated",
-        description = "Jugador dedicado",
+        description = "Dedicated player",
         category = BadgeCategory.PROGRESS,
         shape = BadgeShape.MYSTIC_HEXAGON,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.BRONZE, 3, "3 días seguidos"),
-            MedalTierInfo(BadgeTier.SILVER, 7, "7 días seguidos"),
-            MedalTierInfo(BadgeTier.GOLD, 14, "14 días seguidos"),
-            MedalTierInfo(BadgeTier.DIAMOND, 30, "30 días seguidos"),
-            MedalTierInfo(BadgeTier.LEGENDARY, 100, "100 días seguidos")
+            MedalTierInfo(BadgeTier.BRONZE, 3, "3 consecutive days"),
+            MedalTierInfo(BadgeTier.SILVER, 7, "7 consecutive days"),
+            MedalTierInfo(BadgeTier.GOLD, 14, "14 consecutive days"),
+            MedalTierInfo(BadgeTier.DIAMOND, 30, "30 consecutive days"),
+            MedalTierInfo(BadgeTier.LEGENDARY, 100, "100 consecutive days")
         )
     )
 
     val COLLECTOR = MedalBadge(
         id = "collector",
         name = "Collector",
-        description = "Coleccionista",
+        description = "Item collector",
         category = BadgeCategory.PROGRESS,
         shape = BadgeShape.MYSTIC_HEXAGON,
         tiers = listOf(
             MedalTierInfo(BadgeTier.BRONZE, 5, "5 items"),
             MedalTierInfo(BadgeTier.SILVER, 10, "10 items"),
             MedalTierInfo(BadgeTier.GOLD, 20, "20 items"),
-            MedalTierInfo(BadgeTier.DIAMOND, 30, "Todos los items")
+            MedalTierInfo(BadgeTier.DIAMOND, 30, "All items")
         )
     )
 
     val OG_PLAYER = MedalBadge(
         id = "og_player",
         name = "OG Player",
-        description = "Jugador original",
+        description = "Original player",
         category = BadgeCategory.SPECIAL,
         shape = BadgeShape.DRAGON_EMBLEM,
         tiers = listOf(
-            MedalTierInfo(BadgeTier.LEGENDARY, 1, "Desde el inicio")
+            MedalTierInfo(BadgeTier.LEGENDARY, 1, "From the beginning")
         )
     )
 
@@ -477,75 +477,56 @@ class MedalManager(private val dataStore: DataStoreManager) {
         return when (medal.id) {
             "score_master" -> dataStore.highScoreFlow().first()
             "bubble_king" -> {
-                // For Bronze-Gold: use high score, for Diamond+: use completions
                 val highScore = dataStore.highScoreBubbleKingFlow().first()
-                if (highScore >= 5000) {
-                    // Completed at least once, use completions for Diamond/Legendary
-                    dataStore.bubbleKingCompletionsFlow().first()
-                } else {
-                    highScore
-                }
+                val completions = dataStore.bubbleKingCompletionsFlow().first()
+                // For Bronze-Gold tiers: use high score
+                // For Diamond-Legendary tiers: use completions
+                if (highScore >= 5000 && completions > 0) completions else highScore
             }
             "streak_fury" -> {
-                // For Bronze-Diamond: use high score, for Legendary: use completions
                 val highScore = dataStore.highScorePerfectStreakFlow().first()
-                if (highScore >= 100) {
-                    // Completed at least once, use completions for Legendary
-                    dataStore.perfectStreakCompletionsFlow().first()
-                } else {
-                    highScore
-                }
+                val completions = dataStore.perfectStreakCompletionsFlow().first()
+                // For Bronze-Diamond tiers: use high score
+                // For Legendary tier: use completions
+                if (highScore >= 100 && completions > 0) completions else highScore
             }
             "time_master" -> {
-                // For Bronze-Diamond: use high score, for Legendary: use completions
                 val highScore = dataStore.highScoreTimeMasterFlow().first()
-                if (highScore >= 50) {
-                    // Completed at least once, use completions for Legendary
-                    dataStore.timeMasterCompletionsFlow().first()
-                } else {
-                    highScore
-                }
+                val completions = dataStore.timeMasterCompletionsFlow().first()
+                // For Bronze-Gold tiers: use high score
+                // For Diamond-Legendary tiers: use completions
+                if (highScore >= 50 && completions > 0) completions else highScore
             }
             "combo_master" -> {
-                // For Bronze-Gold: use high score, for Diamond+: use completions
                 val highScore = dataStore.highScoreComboMasterFlow().first()
-                if (highScore >= 50) {
-                    // Completed at least once, use completions for Diamond/Legendary
-                    dataStore.comboMasterCompletionsFlow().first()
-                } else {
-                    highScore
-                }
+                val completions = dataStore.comboMasterCompletionsFlow().first()
+                // For Bronze-Gold tiers: use high score
+                // For Diamond-Legendary tiers: use completions
+                if (highScore >= 50 && completions > 0) completions else highScore
             }
             "speed_demon" -> {
-                // For Bronze-Diamond: use high score, for Legendary: use completions
                 val highScore = dataStore.highScoreSpeedDemonFlow().first()
-                if (highScore >= 100) {
-                    // Completed at least once, use completions for Legendary
-                    dataStore.speedDemonCompletionsFlow().first()
-                } else {
-                    highScore
-                }
+                val completions = dataStore.speedDemonCompletionsFlow().first()
+                // For Bronze-Gold tiers: use high score
+                // For Diamond-Legendary tiers: use completions
+                if (highScore >= 100 && completions > 0) completions else highScore
             }
             "endurance_champion" -> {
-                // For Bronze-Gold: use high score, for Diamond+: use completions
                 val highScore = dataStore.highScoreEnduranceChampionFlow().first()
-                if (highScore >= 180) {
-                    // Completed at least once, use completions for Diamond/Legendary
-                    dataStore.enduranceChampionCompletionsFlow().first()
-                } else {
-                    highScore
-                }
+                val completions = dataStore.enduranceChampionCompletionsFlow().first()
+                // For Bronze-Gold tiers: use high score
+                // For Diamond-Legendary tiers: use completions
+                if (highScore >= 180 && completions > 0) completions else highScore
             }
             "sharpshooter" -> dataStore.bestClickPercentFlow().first()
             "challenger" -> {
-                // For Bronze-Gold: use challenges completed count, for Diamond+: need special logic
                 val completedCount = dataStore.challengesCompletedCountFlow().first()
                 if (completedCount >= 6) {
                     // All 6 completed, check for Diamond/Legendary requirements
                     val allGold = checkAllChallengesGoldOrBetter()
                     val allLegendary = checkAllChallengesLegendary()
-                    if (allLegendary) 10 // Arbitrary high value for Legendary
-                    else if (allGold) 1 // Value to unlock Diamond
+                    if (allLegendary) 60 // Value for Legendary tier (10 completions * 6 challenges)
+                    else if (allGold) 6 // Value for Diamond tier (all challenges with gold)
                     else completedCount
                 } else {
                     completedCount
@@ -574,10 +555,10 @@ class MedalManager(private val dataStore: DataStoreManager) {
     // Check if all 6 challenges have at least Gold tier
     private suspend fun checkAllChallengesGoldOrBetter(): Boolean {
         val bubbleKing = dataStore.highScoreBubbleKingFlow().first() >= 5000
-        val perfectStreak = dataStore.highScorePerfectStreakFlow().first() >= 75
-        val timeMaster = dataStore.highScoreTimeMasterFlow().first() >= 38
+        val perfectStreak = dataStore.highScorePerfectStreakFlow().first() >= 100
+        val timeMaster = dataStore.highScoreTimeMasterFlow().first() >= 50
         val comboMaster = dataStore.highScoreComboMasterFlow().first() >= 50
-        val speedDemon = dataStore.highScoreSpeedDemonFlow().first() >= 75
+        val speedDemon = dataStore.highScoreSpeedDemonFlow().first() >= 100
         val endurance = dataStore.highScoreEnduranceChampionFlow().first() >= 180
         return bubbleKing && perfectStreak && timeMaster && comboMaster && speedDemon && endurance
     }
