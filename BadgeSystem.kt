@@ -608,6 +608,33 @@ class MedalManager(private val dataStore: DataStoreManager) {
     }
 
     private suspend fun calculateCurrentTier(medal: MedalBadge, value: Int): BadgeTier {
+        // Special handling for CHALLENGER medal which has same requirement for Gold and Diamond
+        if (medal.id == "challenger") {
+            val completedCount = dataStore.challengesCompletedCountFlow().first()
+            var tier = BadgeTier.LOCKED
+            
+            // Bronze: 1 challenge completed
+            if (completedCount >= 1) tier = BadgeTier.BRONZE
+            // Silver: 3 challenges completed
+            if (completedCount >= 3) tier = BadgeTier.SILVER
+            // Gold: all 6 challenges completed
+            if (completedCount >= 6) tier = BadgeTier.GOLD
+            
+            // Diamond: all 6 challenges at Gold tier or better
+            if (tier == BadgeTier.GOLD) {
+                val allGold = checkAllChallengesGoldOrBetter()
+                if (allGold) tier = BadgeTier.DIAMOND
+            }
+            
+            // Legendary: all 6 challenges completed 10+ times each
+            if (tier == BadgeTier.DIAMOND) {
+                val allLegendary = checkAllChallengesLegendary()
+                if (allLegendary) tier = BadgeTier.LEGENDARY
+            }
+            
+            return tier
+        }
+        
         // For challenge medals with dual value types (score/completions), we need special handling
         when (medal.id) {
             "bubble_king", "combo_master", "endurance_champion" -> {
