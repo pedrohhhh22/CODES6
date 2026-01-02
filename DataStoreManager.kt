@@ -193,6 +193,14 @@ class DataStoreManager(private val context: Context) {
         val CHALLENGES_COMPLETED_COUNT = intPreferencesKey("challenges_completed_count")
         val TOTAL_POPS = intPreferencesKey("total_pops")
 
+        // ====== CHALLENGE COMPLETION COUNTERS ======
+        val BUBBLE_KING_COMPLETIONS = intPreferencesKey("bubble_king_completions")
+        val PERFECT_STREAK_COMPLETIONS = intPreferencesKey("perfect_streak_completions")
+        val TIME_MASTER_COMPLETIONS = intPreferencesKey("time_master_completions")
+        val COMBO_MASTER_COMPLETIONS = intPreferencesKey("combo_master_completions")
+        val SPEED_DEMON_COMPLETIONS = intPreferencesKey("speed_demon_completions")
+        val ENDURANCE_CHAMPION_COMPLETIONS = intPreferencesKey("endurance_champion_completions")
+
         val LEVEL_REWARDS_CLAIMED = stringPreferencesKey("level_rewards_claimed")
         val LEVEL_UNLOCK_BUBBLE = intPreferencesKey("level_unlock_bubble_10")
         val LEVEL_UNLOCK_BG = intPreferencesKey("level_unlock_bg_11")
@@ -886,6 +894,68 @@ class DataStoreManager(private val context: Context) {
 
     suspend fun resetTotalPops() {
         context.dataStore.edit { prefs -> prefs[TOTAL_POPS] = 0 }
+    }
+
+    // ==================== CHALLENGE COMPLETION COUNTERS ====================
+
+    fun bubbleKingCompletionsFlow(): Flow<Int> =
+        context.dataStore.data.map { prefs -> prefs[BUBBLE_KING_COMPLETIONS] ?: 0 }
+
+    suspend fun incrementBubbleKingCompletions() {
+        context.dataStore.edit { prefs ->
+            val current = prefs[BUBBLE_KING_COMPLETIONS] ?: 0
+            prefs[BUBBLE_KING_COMPLETIONS] = current + 1
+        }
+    }
+
+    fun perfectStreakCompletionsFlow(): Flow<Int> =
+        context.dataStore.data.map { prefs -> prefs[PERFECT_STREAK_COMPLETIONS] ?: 0 }
+
+    suspend fun incrementPerfectStreakCompletions() {
+        context.dataStore.edit { prefs ->
+            val current = prefs[PERFECT_STREAK_COMPLETIONS] ?: 0
+            prefs[PERFECT_STREAK_COMPLETIONS] = current + 1
+        }
+    }
+
+    fun timeMasterCompletionsFlow(): Flow<Int> =
+        context.dataStore.data.map { prefs -> prefs[TIME_MASTER_COMPLETIONS] ?: 0 }
+
+    suspend fun incrementTimeMasterCompletions() {
+        context.dataStore.edit { prefs ->
+            val current = prefs[TIME_MASTER_COMPLETIONS] ?: 0
+            prefs[TIME_MASTER_COMPLETIONS] = current + 1
+        }
+    }
+
+    fun comboMasterCompletionsFlow(): Flow<Int> =
+        context.dataStore.data.map { prefs -> prefs[COMBO_MASTER_COMPLETIONS] ?: 0 }
+
+    suspend fun incrementComboMasterCompletions() {
+        context.dataStore.edit { prefs ->
+            val current = prefs[COMBO_MASTER_COMPLETIONS] ?: 0
+            prefs[COMBO_MASTER_COMPLETIONS] = current + 1
+        }
+    }
+
+    fun speedDemonCompletionsFlow(): Flow<Int> =
+        context.dataStore.data.map { prefs -> prefs[SPEED_DEMON_COMPLETIONS] ?: 0 }
+
+    suspend fun incrementSpeedDemonCompletions() {
+        context.dataStore.edit { prefs ->
+            val current = prefs[SPEED_DEMON_COMPLETIONS] ?: 0
+            prefs[SPEED_DEMON_COMPLETIONS] = current + 1
+        }
+    }
+
+    fun enduranceChampionCompletionsFlow(): Flow<Int> =
+        context.dataStore.data.map { prefs -> prefs[ENDURANCE_CHAMPION_COMPLETIONS] ?: 0 }
+
+    suspend fun incrementEnduranceChampionCompletions() {
+        context.dataStore.edit { prefs ->
+            val current = prefs[ENDURANCE_CHAMPION_COMPLETIONS] ?: 0
+            prefs[ENDURANCE_CHAMPION_COMPLETIONS] = current + 1
+        }
     }
 
     // ==================== TOURNAMENT STATS FOR BADGES ====================
