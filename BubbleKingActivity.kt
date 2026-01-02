@@ -1759,6 +1759,10 @@ fun BubbleKingScreen(onExit: () -> Unit) {
                     if (finalPoints > storedRecord) {
                         dataStore.saveHighScoreBubbleKing(finalPoints)
                     }
+                    // Increment completion counter if challenge completed (5000+ points)
+                    if (finalPoints >= 5000) {
+                        dataStore.incrementBubbleKingCompletions()
+                    }
                     if (coinsEarned > 0) {
                         dataStore.addCoins(coinsEarned)
                     }

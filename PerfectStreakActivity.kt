@@ -1751,6 +1751,10 @@ fun PerfectStreakScreen(onExit: () -> Unit) {
                     if (currentStreak > storedRecord) {
                         dataStore.saveHighScorePerfectStreak(currentStreak)
                     }
+                    // Increment completion counter if challenge completed (100+ streak)
+                    if (currentStreak >= 100) {
+                        dataStore.incrementPerfectStreakCompletions()
+                    }
                     if (coinsEarned > 0) {
                         dataStore. addCoins(coinsEarned)
                     }

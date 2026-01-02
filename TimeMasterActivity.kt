@@ -1647,6 +1647,10 @@ fun TimeMasterScreen(onExit: () -> Unit) {
                     if (totalPopped > storedRecord) {
                         dataStore. saveHighScoreTimeMaster(totalPopped)
                     }
+                    // Increment completion counter if challenge completed (50+ bubbles)
+                    if (totalPopped >= 50) {
+                        dataStore.incrementTimeMasterCompletions()
+                    }
                     if (coinsEarned > 0) {
                         dataStore.addCoins(coinsEarned)
                     }
