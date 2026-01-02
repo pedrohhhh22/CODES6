@@ -1772,6 +1772,10 @@ fun SpeedDemonScreen(onExit: () -> Unit) {
                     if (finalBubbles > storedRecord) {
                         dataStore.saveHighScoreSpeedDemon(finalBubbles)
                     }
+                    // Increment completion counter if challenge completed (100+ bubbles)
+                    if (finalBubbles >= 100) {
+                        dataStore.incrementSpeedDemonCompletions()
+                    }
                     if (coinsEarned > 0) {
                         dataStore.addCoins(coinsEarned)
                     }

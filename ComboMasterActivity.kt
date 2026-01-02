@@ -1783,6 +1783,10 @@ fun ComboMasterScreen(onExit: () -> Unit) {
                     if (finalCombo > storedRecord) {
                         dataStore.saveHighScoreComboMaster(finalCombo)
                     }
+                    // Increment completion counter if challenge completed (50+ combo)
+                    if (finalCombo >= 50) {
+                        dataStore.incrementComboMasterCompletions()
+                    }
                     if (coinsEarned > 0) {
                         dataStore.addCoins(coinsEarned)
                     }

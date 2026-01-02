@@ -1758,6 +1758,10 @@ fun EnduranceChampionScreen(onExit: () -> Unit) {
                     if (finalTime > storedRecord) {
                         dataStore.saveHighScoreEnduranceChampion(finalTime)
                     }
+                    // Increment completion counter if challenge completed (180+ seconds)
+                    if (finalTime >= 180) {
+                        dataStore.incrementEnduranceChampionCompletions()
+                    }
                     if (coinsEarned > 0) {
                         dataStore.addCoins(coinsEarned)
                     }
